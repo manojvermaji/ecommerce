@@ -3,9 +3,13 @@
 <%= render @product %>
 
 <div>
-  <%= button_to 'Add to cart', '#', class: 'button is-warning add-to-cart' %>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
+<%#= button_to "Add to Cart", add_to_cart_path(product_id: @product.id), method: :post %>
 
-  <%= button_to "Destroy this product", @product, method: :delete %>
+  <%= button_to 'Add to cart', add_to_cart_path(product_id: @product.id), class: 'button is-warning add-to-cart' %>
+    <%= link_to "Back to products", products_path %>
+
+  <%# if product_author(product)%>
+     <%= link_to "Edit this product", edit_product_path(@product) %> |
+     <%= button_to "Destroy this product", @product, method: :delete %>
+  <%#end%>
 </div>
