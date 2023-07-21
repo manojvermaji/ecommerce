@@ -48,7 +48,9 @@ class ProductsController < ApplicationController
 
   private
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.find_by(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      redirect_to '/404'
     end
 
     def product_params

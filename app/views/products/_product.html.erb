@@ -1,21 +1,24 @@
+  
+        <%#=link_to image_tag(@product.image_url(:default)), product %>
+  
 <div id="<%= dom_id product %>">
-  <p>
+  <div style="display:flex; justify-content:space-between;margin: 1em 5em;">
     <strong>Name:</strong>
     <%= product.name %>
-  </p>
-
-  <p>
-    <strong>Desc:</strong>
+    <strong>Description:</strong>
     <%= product.desc %>
-  </p>
-
-  <p>
     <strong>Price:</strong>
     <%= product.price %>
-  </p>
 
- 
-        <%#=link_to image_tag(@product.image_url(:default)), product %>
+    <%# <%= product.price %>
+    <%# <%= form_with(url: cart_add_path) do |f| %>
+    <%# <%= f.hidden_field :id, value:product.id %>
+    <%# <%= f.number_field :quantity, value: 0,min: 1%>
+    <%# <%= f.submit "Add To Cart "%>
+    <%# <% end %>  
+
+
+ </div>
   
 
 </div>
