@@ -14,3 +14,5 @@ class Cart < ApplicationRecord
   end
 
 end
+
+# user to cart To cartitem user.cart.cartitems

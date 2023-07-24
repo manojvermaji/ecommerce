@@ -5,6 +5,7 @@ class CartItemController < ApplicationController
 
   def index
     @cart_item = CartItem.all
+    render json: @cart_items
   end
 
   def show
@@ -19,16 +20,16 @@ class CartItemController < ApplicationController
     @cartitem = @cart.add_product(cart_item_params)#product
 
     if @cartitem.save
-      format.html { redirect_to @cart_item.cart, notice: 'Item added to cart' }
+      redirect_to @cart_item.cart, alert: 'Item added to cart' 
     else
-      format.html { render :new }
+      render :new 
     end
   end
 
   def destroy
     @cart = Cart.find(session[:cart_id])
     @cartitem.destroy 
-    format.html { redirect_to cart_path(@cart), notice: 'Item successfully removed.' }
+    redirect_to cart_path(@cart), alert: 'Item successfully removed.' 
   end
 
   private

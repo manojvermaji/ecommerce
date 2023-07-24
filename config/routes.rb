@@ -5,6 +5,7 @@ Rails.application.routes.draw do
  
 
    post '/add_to_cart', to: 'cart#add_to_cart', as: 'add_to_cart'
+   get '/show_cart_items', to: 'cart#show_cart_items'
 
 
   resources :products

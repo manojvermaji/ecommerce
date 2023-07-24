@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
-  #before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @products = Product.all
@@ -18,37 +18,30 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    if @product.save
+      redirect_to product_url(@product), alert: "Product was successfully created." 
+    else
+      render :new 
     end
+    
   end
 
   def update
-    respond_to do |format|
-      if @product.update(product_params)
-        format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+     if @product.update(product_params)
+      redirect_to product_url(@product), alert: "Product was successfully updated." 
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   def destroy
     @product.destroy
-
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
-    end
+      redirect_to products_url, alert: "Product was successfully destroyed." 
   end
 
   private
     def set_product
-      @product = Product.find_by(params[:id])
+      @product = Product.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
       redirect_to '/404'
     end
